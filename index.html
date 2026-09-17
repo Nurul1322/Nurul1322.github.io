@@ -4,609 +4,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio - Nurul Azmi</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Eksplorasi DKV | Desain Komunikasi Visual</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome untuk Ikon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+        }
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+            margin-top: 5vh;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+    </style>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                    },
                     colors: {
-                        brand: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#0284c7',
-                            600: '#0369a1',
-                            700: '#075985',
-                        }
+                        primary: '#4f46e5',
+                        secondary: '#ec4899',
+                        dark: '#0f172a',
+                        light: '#f1f5f9'
                     }
                 }
             }
         }
     </script>
-    <style>
-        .glass {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white">
+<body class="text-slate-800 antialiased selection:bg-primary selection:text-white">
 
-    <!-- Header / Navigasi -->
-    <header class="fixed top-0 left-0 right-0 z-40 glass border-b border-slate-200/60 shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo / Nama -->
-                <a href="#" class="text-xl font-bold bg-gradient-to-r from-brand-600 to-indigo-600 bg-clip-text text-transparent">
-                    Nurul Azmi.
-                </a>
-
-                <!-- Navigasi Desktop -->
-                <nav class="hidden md:flex space-x-8 text-sm font-medium">
-                    <a href="#tentang" class="text-slate-600 hover:text-brand-600 transition-colors">Tentang Saya</a>
-                    <a href="#portofolio" class="text-slate-600 hover:text-brand-600 transition-colors">Portofolio Karya</a>
-                    <a href="#kontak" class="text-slate-600 hover:text-brand-600 transition-colors">Kontak</a>
-                </nav>
-
-                <!-- Tombol CTA Kontak -->
-                <div class="flex items-center space-x-3">
-                    <a href="mailto:De.azmi02@gmail.com" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-brand-600 rounded-full hover:bg-brand-700 transition-all shadow-md shadow-brand-500/20">
-                        <i class="fa-regular fa-paper-plane mr-2"></i> Hubungi
+    <!-- Navbar -->
+    <nav class="fixed w-full z-40 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary gradient-text">
+                        <i class="fa-solid fa-pen-nib mr-2 text-primary"></i>Eksplorasi DKV
                     </a>
                 </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#tujuan" class="text-slate-600 hover:text-primary font-medium transition-colors text-sm uppercase tracking-wider">Tujuan</a>
+                    <a href="#unsur" class="text-slate-600 hover:text-primary font-medium transition-colors text-sm uppercase tracking-wider">Unsur</a>
+                    <a href="#prinsip" class="text-slate-600 hover:text-primary font-medium transition-colors text-sm uppercase tracking-wider">Prinsip</a>
+                    <a href="#branding" class="text-slate-600 hover:text-primary font-medium transition-colors text-sm uppercase tracking-wider">Branding</a>
+                    <a href="#alur" class="text-slate-600 hover:text-primary font-medium transition-colors text-sm uppercase tracking-wider">Alur</a>
+                    <a href="#tools" class="text-slate-600 hover:text-primary font-medium transition-colors text-sm uppercase tracking-wider">Tools</a>
+                    <a href="#karya" class="text-slate-600 hover:text-primary font-medium transition-colors text-sm uppercase tracking-wider">Karya</a>
+                    <a href="#profil" class="bg-primary hover:bg-indigo-700 text-white px-5 py-2 rounded-full font-medium transition-all shadow-md hover:shadow-lg text-sm uppercase tracking-wider">Profil Desainer</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-primary focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
             </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-xl absolute w-full border-t border-slate-100">
+            <div class="px-4 pt-2 pb-6 space-y-1 sm:px-3 flex flex-col">
+                <a href="#tujuan" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-primary hover:bg-slate-50 border-b border-slate-100">Tujuan Komunikasi Visual</a>
+                <a href="#unsur" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-primary hover:bg-slate-50 border-b border-slate-100">Unsur-unsur DKV</a>
+                <a href="#prinsip" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-primary hover:bg-slate-50 border-b border-slate-100">Prinsip Desain</a>
+                <a href="#branding" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-primary hover:bg-slate-50 border-b border-slate-100">Element Branding</a>
+                <a href="#alur" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-primary hover:bg-slate-50 border-b border-slate-100">Alur Komunikasi</a>
+                <a href="#tools" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-primary hover:bg-slate-50 border-b border-slate-100">Tools Desain</a>
+                <a href="#karya" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-primary hover:bg-slate-50 border-b border-slate-100">Galeri Hasil Karya</a>
+                <a href="#profil" class="mobile-link block px-3 py-3 rounded-md text-base font-medium bg-primary text-white mt-4 text-center">Profil Desainer</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-900">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 z-0 opacity-20">
+            <svg class="absolute left-0 top-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <polygon fill="#4f46e5" points="0,100 100,0 100,100"/>
+            </svg>
+            <div class="absolute right-0 top-0 w-64 h-64 bg-secondary rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
+            <div class="absolute left-10 bottom-10 w-72 h-72 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-slate-200 text-sm font-semibold tracking-wider mb-6 border border-white/20 backdrop-blur-sm">PANDUAN KOMPREHENSIF</span>
+            <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-6 leading-tight tracking-tight">
+                Memahami Dunia <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-500">Desain Komunikasi Visual</span>
+            </h1>
+            <p class="mt-4 text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto font-light leading-relaxed mb-10">
+                Seni menyampaikan pesan melalui bahasa visual. Pelajari elemen, prinsip, hingga melihat hasil nyata dari perpaduan kreativitas dan strategi.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#tujuan" class="px-8 py-4 bg-primary hover:bg-indigo-600 text-white rounded-full font-semibold text-lg transition-all shadow-lg hover:shadow-indigo-500/30 flex items-center justify-center">
+                    Mulai Belajar <i class="fa-solid fa-arrow-down ml-2"></i>
+                </a>
+                <a href="#karya" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-full font-semibold text-lg transition-all backdrop-blur-sm flex items-center justify-center">
+                    Lihat Galeri <i class="fa-solid fa-image ml-2"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Wave shape divider -->
+        <div class="absolute bottom-0 left-0 right-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="w-full h-auto text-slate-50 fill-current">
+                <path d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,213.3C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
         </div>
     </header>
 
-    <!-- Hero / Informasi Diri -->
-    <section id="tentang" class="pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-                
-                <!-- Teks Diri -->
-                <div class="md:col-span-7 space-y-6 text-center md:text-left">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-brand-600 text-xs font-semibold tracking-wide">
-                        <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
-                        Desainer Grafis & Pelajar DKV / SMK
+    <!-- Tujuan Komunikasi Visual -->
+    <section id="tujuan" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-base text-primary font-semibold tracking-wide uppercase">Landasan Utama</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl">Tujuan Komunikasi Visual</p>
+                <div class="w-24 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Tujuan 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 card-hover text-center relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 transform group-hover:rotate-12 transition-transform">
+                        <i class="fa-solid fa-bullhorn text-2xl"></i>
                     </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Memberi Informasi (Informasi)</h3>
+                    <p class="text-slate-600">Menyampaikan pesan, data, atau fakta secara visual agar lebih mudah, cepat dipahami, dan diingat oleh audiens target (contoh: infografis, rambu lalu lintas).</p>
+                </div>
+
+                <!-- Tujuan 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 card-hover text-center relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-pink-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+                    <div class="w-16 h-16 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6 transform group-hover:rotate-12 transition-transform">
+                        <i class="fa-solid fa-magnet text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Mempersuasi (Persuasi)</h3>
+                    <p class="text-slate-600">Mempengaruhi audiens untuk melakukan suatu tindakan, mengubah persepsi, atau membeli sebuah produk/jasa (contoh: iklan, poster promosi, kampanye).</p>
+                </div>
+
+                <!-- Tujuan 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 card-hover text-center relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+                    <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 transform group-hover:rotate-12 transition-transform">
+                        <i class="fa-solid fa-id-badge text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Identifikasi (Identitas)</h3>
+                    <p class="text-slate-600">Menciptakan tanda pengenal yang unik dan khas agar sebuah entitas, perusahaan, atau produk mudah dibedakan dari pesaingnya (contoh: logo, seragam).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unsur-unsur DKV -->
+    <section id="unsur" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <h2 class="text-base text-secondary font-semibold tracking-wide uppercase mb-2">Bahan Baku Desain</h2>
+                    <h3 class="text-3xl leading-9 font-extrabold tracking-tight text-slate-900 sm:text-4xl mb-6">Unsur-unsur DKV</h3>
+                    <p class="text-lg text-slate-600 mb-8">Elemen dasar yang membentuk suatu karya visual. Menguasai unsur ini ibarat mengetahui bahan masakan sebelum meraciknya.</p>
                     
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                        Halo, Saya <span class="bg-gradient-to-r from-brand-600 to-indigo-600 bg-clip-text text-transparent">Nurul Azmi</span>
-                    </h1>
-
-                    <p class="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto md:mx-0">
-                        Siswa dari <span class="font-semibold text-slate-800">SMK Al Irsyad Al Islamiyyah Haurgeulis</span>. Berdedikasi tinggi dalam penciptaan karya komunikasi visual, poster edukatif, branding UMKM, dan konsep kreatif digital.
-                    </p>
-
-                    <!-- Card Informasi Biodata -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                        <div class="p-3.5 rounded-xl bg-white border border-slate-200/80 shadow-sm flex items-center space-x-3">
-                            <div class="w-10 h-10 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-lg shrink-0">
-                                <i class="fa-solid fa-graduation-cap"></i>
-                            </div>
-                            <div class="overflow-hidden">
-                                <p class="text-xs text-slate-400 font-medium">Sekolah</p>
-                                <p class="text-xs sm:text-sm font-semibold text-slate-800 truncate" title="SMK Al Irsyad Al Islamiyyah Haurgeulis">SMK Al Irsyad Haurgeulis</p>
-                            </div>
-                        </div>
-
-                        <div class="p-3.5 rounded-xl bg-white border border-slate-200/80 shadow-sm flex items-center space-x-3">
-                            <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg shrink-0">
-                                <i class="fa-solid fa-cake-candles"></i>
-                            </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-start">
+                            <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
                             <div>
-                                <p class="text-xs text-slate-400 font-medium">Tanggal Lahir</p>
-                                <p class="text-xs sm:text-sm font-semibold text-slate-800">13 Februari 2009</p>
+                                <h4 class="font-bold text-slate-800">Garis (Line)</h4>
+                                <p class="text-sm text-slate-600">Membentuk batas, arah, dan tekstur.</p>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Tombol Aksi -->
-                    <div class="pt-4 flex flex-wrap gap-4 justify-center md:justify-start">
-                        <a href="#portofolio" class="px-6 py-3 rounded-xl bg-slate-900 text-white font-medium hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10 flex items-center gap-2">
-                            <i class="fa-solid fa-layer-group text-xs"></i> Lihat 10 Karya
-                        </a>
-                        <a href="mailto:De.azmi02@gmail.com" class="px-6 py-3 rounded-xl bg-white border border-slate-200 text-slate-700 font-medium hover:bg-slate-50 transition-all flex items-center gap-2">
-                            <i class="fa-regular fa-envelope text-slate-500"></i> De.azmi02@gmail.com
-                        </a>
+                        <div class="flex items-start">
+                            <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Bentuk (Shape)</h4>
+                                <p class="text-sm text-slate-600">Area dua dimensi (geometris/organik).</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Warna (Color)</h4>
+                                <p class="text-sm text-slate-600">Membangun mood, makna, dan hirarki.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Tipografi</h4>
+                                <p class="text-sm text-slate-600">Seni mengatur huruf untuk keterbacaan.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Tekstur (Texture)</h4>
+                                <p class="text-sm text-slate-600">Kualitas permukaan (visual/taktil).</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Ruang (Space)</h4>
+                                <p class="text-sm text-slate-600">Area di sekitar elemen (positif/negatif).</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="md:w-1/2 relative">
+                    <!-- Placeholder untuk ilustrasi Unsur DKV -->
+                    <div class="bg-gradient-to-br from-slate-100 to-slate-200 rounded-3xl p-8 relative shadow-inner overflow-hidden aspect-square flex items-center justify-center">
+                        <div class="absolute top-10 right-10 w-20 h-20 bg-red-400 rounded-full mix-blend-multiply opacity-80 animate-pulse"></div>
+                        <div class="absolute bottom-10 left-10 w-24 h-24 bg-yellow-400 rotate-45 mix-blend-multiply opacity-80"></div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-9xl font-serif font-bold text-blue-500 opacity-80">A</div>
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDBMODggWk04IDBMMCA4IFoiIHN0cm9rZT0iI2QxZDVkYiIgc3Ryb2tlLXdpZHRoPSIxIj48L3BhdGg+Cjwvc3ZnPg==')] opacity-30 mix-blend-overlay pointer-events-none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Foto Profil -->
-                <div class="md:col-span-5 flex justify-center">
-                    <div class="relative w-64 h-64 sm:w-80 sm:h-80">
-                        <div class="absolute -inset-4 rounded-full bg-gradient-to-tr from-brand-500 to-indigo-500 opacity-20 blur-2xl"></div>
+    <!-- Prinsip Desain -->
+    <section id="prinsip" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-primary rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-secondary rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-base text-blue-400 font-semibold tracking-wide uppercase">Aturan Meracik Elemen</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">Prinsip Desain</p>
+                <div class="w-24 h-1 bg-blue-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Keseimbangan -->
+                <div class="bg-slate-800/50 backdrop-blur-md p-6 rounded-2xl border border-slate-700 hover:border-blue-500 transition-colors group">
+                    <div class="w-12 h-12 bg-slate-700 text-blue-400 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-scale-balanced text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Keseimbangan (Balance)</h3>
+                    <p class="text-sm text-slate-400">Distribusi bobot visual yang merata (Simetris, Asimetris, atau Radial) agar desain tidak terasa 'berat sebelah'.</p>
+         
                         
-                        <div class="relative w-full h-full rounded-2xl overflow-hidden border-4 border-white shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
-                            <img 
-                                src="https://cdn.phototourl.com/member/2026-09-01-9c1249fe-5525-48fa-90c1-977d05873cde.jpg" 
-                                alt="[Foto Profil Nurul Azmi]" 
-                                class="w-full h-full object-cover"
-                                onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400?text=Nurul+Azmi';"
-                            />
-                        </div>
+    
 
-                        <!-- Badge Profil -->
-                        <div class="absolute -bottom-4 -left-4 bg-white p-3.5 rounded-2xl shadow-xl border border-slate-100 flex items-center space-x-3">
-                            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center">
-                                <i class="fa-solid fa-palette text-lg"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs font-bold text-slate-800">Desainer Grafis</p>
-                                <p class="text-[10px] text-slate-500">10 Karya Pilihan</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    
 
-            </div>
-        </div>
-    </section>
-
-    <!-- Galeri Portofolio -->
-    <section id="portofolio" class="py-16 bg-white border-t border-slate-100">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- Judul Galeri -->
-            <div class="text-center max-w-2xl mx-auto mb-10">
-                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Portofolio Karya Desain</h2>
-                <div class="w-12 h-1 bg-brand-500 mx-auto my-3 rounded-full"></div>
-                <p class="text-slate-600 text-sm sm:text-base">
-                    Eksplorasi karya poster promosi, identitas visual, tugas sekolah, dan proyek desain interaktif.
-                </p>
-            </div>
-
-            <!-- Filter Kategori -->
-            <div class="flex flex-wrap justify-center gap-2 mb-10" id="filter-buttons">
-                <button onclick="filterGallery('all')" class="filter-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-slate-900 text-white transition-all shadow-sm">
-                    Semua Karya (10)
-                </button>
-                <button onclick="filterGallery('poster')" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
-                    Poster Promosi & Lomba
-                </button>
-                <button onclick="filterGallery('branding')" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
-                    Branding & Elemen Visual
-                </button>
-            </div>
-
-            <!-- Grid Karya Portofolio -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="portfolio-grid">
                 
-                <!-- Karya 1: Poster Muffin -->
-                <div class="portfolio-item poster group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200/80 hover:shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-200">
-                        <img 
-                            src="https://cdn.phototourl.com/free/2026-09-01-5ce64e4c-3f01-4059-acc2-9fda697c6f7b.jpg" 
-                            alt="[Poster Muffin - Tugas UMKM]" 
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer"
-                            onclick="openModal(this.src, 'Poster Muffin', 'Tugas membuat poster UMKM untuk produk muffin.')"
-                            onerror="this.onerror=null; this.src='https://via.placeholder.com/400x500?text=Poster+Muffin';"
-                        >
-                        <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[11px] font-semibold px-2.5 py-1 rounded-md">
-                            UMKM
-                        </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-slate-900 text-lg group-hover:text-brand-600 transition-colors">Poster Muffin</h3>
-                            <p class="text-slate-600 text-sm mt-1">Tugas membuat poster UMKM</p>
-                        </div>
-                        <button 
-                            onclick="openModal('https://cdn.phototourl.com/free/2026-09-01-5ce64e4c-3f01-4059-acc2-9fda697c6f7b.jpg', 'Poster Muffin', 'Tugas membuat poster UMKM untuk produk muffin.')"
-                            class="mt-4 w-full py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-brand-50 hover:border-brand-200 hover:text-brand-600 transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-expand text-[10px]"></i> Perbesar Gambar
-                        </button>
-                    </div>
-                </div>
+                    
 
-                <!-- Karya 2: Proyek PKL Ramadhan -->
-                <div class="portfolio-item poster group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200/80 hover:shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-200">
-                        <img 
-                            src="https://cdn.phototourl.com/free/2026-09-01-716adbe1-5531-4e99-b23f-aabadea2fdf8.jpg" 
-                            alt="[Proyek PKL - Poster Ramadhan]" 
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer"
-                            onclick="openModal(this.src, 'Proyek PKL - Poster Ramadhan', 'Membuat poster menyambut bulan suci Ramadhan.')"
-                            onerror="this.onerror=null; this.src='https://via.placeholder.com/400x500?text=Proyek+PKL+Ramadhan';"
-                        >
-                        <div class="absolute top-3 left-3 bg-brand-600 text-white text-[11px] font-semibold px-2.5 py-1 rounded-md">
-                            Proyek PKL
-                        </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-slate-900 text-lg group-hover:text-brand-600 transition-colors">Proyek PKL</h3>
-                            <p class="text-slate-600 text-sm mt-1">Membuat poster menyambut Ramadhan</p>
-                        </div>
-                        <button 
-                            onclick="openModal('https://cdn.phototourl.com/free/2026-09-01-716adbe1-5531-4e99-b23f-aabadea2fdf8.jpg', 'Proyek PKL - Poster Ramadhan', 'Membuat poster menyambut bulan suci Ramadhan.')"
-                            class="mt-4 w-full py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-brand-50 hover:border-brand-200 hover:text-brand-600 transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-expand text-[10px]"></i> Perbesar Gambar
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Karya 3: Proyek Sidang SPMB -->
-                <div class="portfolio-item poster group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200/80 hover:shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-200">
-                        <img 
-                            src="https://cdn.phototourl.com/free/2026-09-01-85775942-5411-4cfe-9723-4679560b384d.jpg" 
-                            alt="[Proyek Sidang - Poster SPMB]" 
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer"
-                            onclick="openModal(this.src, 'Proyek Sidang', 'Membuat poster SPMB revisi sidang.')"
-                            onerror="this.onerror=null; this.src='https://via.placeholder.com/400x500?text=Poster+SPMB';"
-                        >
-                        <div class="absolute top-3 left-3 bg-indigo-600 text-white text-[11px] font-semibold px-2.5 py-1 rounded-md">
-                            Akademik
-                        </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-slate-900 text-lg group-hover:text-brand-600 transition-colors">Proyek Sidang</h3>
-                            <p class="text-slate-600 text-sm mt-1">Membuat poster SPMB revisi sidang</p>
-                        </div>
-                        <button 
-                            onclick="openModal('https://cdn.phototourl.com/free/2026-09-01-85775942-5411-4cfe-9723-4679560b384d.jpg', 'Proyek Sidang', 'Membuat poster SPMB revisi sidang.')"
-                            class="mt-4 w-full py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-brand-50 hover:border-brand-200 hover:text-brand-600 transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-expand text-[10px]"></i> Perbesar Gambar
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Karya 4: Lomba Hari Pahlawan -->
-                <div class="portfolio-item poster group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200/80 hover:shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-200">
-                        <img 
-                            src="https://cdn.phototourl.com/free/2026-09-01-7a1aecee-c33d-4354-a47a-a4ea60de074b.jpg" 
-                            alt="[Lomba Hari Pahlawan - Poster]" 
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer"
-                            onclick="openModal(this.src, 'Lomba Hari Pahlawan', 'Membuat poster peringatan Hari Pahlawan.')"
-                            onerror="this.onerror=null; this.src='https://via.placeholder.com/400x500?text=Hari+Pahlawan';"
-                        >
-                        <div class="absolute top-3 left-3 bg-red-600 text-white text-[11px] font-semibold px-2.5 py-1 rounded-md">
-                            Lomba
-                        </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-slate-900 text-lg group-hover:text-brand-600 transition-colors">Lomba Hari Pahlawan</h3>
-                            <p class="text-slate-600 text-sm mt-1">Membuat poster Hari Pahlawan</p>
-                        </div>
-                        <button 
-                            onclick="openModal('https://cdn.phototourl.com/free/2026-09-01-7a1aecee-c33d-4354-a47a-a4ea60de074b.jpg', 'Lomba Hari Pahlawan', 'Membuat poster Hari Pahlawan.')"
-                            class="mt-4 w-full py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-brand-50 hover:border-brand-200 hover:text-brand-600 transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-expand text-[10px]"></i> Perbesar Gambar
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Karya 5: Poster Promosi KIK -->
-                <div class="portfolio-item poster group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200/80 hover:shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-200">
-                        <img 
-                            src="https://cdn.phototourl.com/free/2026-09-01-c6d49860-68ef-4d35-89c1-f11b7067a022.jpg" 
-                            alt="[Poster Promosi KIK]" 
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer"
-                            onclick="openModal(this.src, 'Poster Promosi', 'Membuat poster promosi KIK.')"
-                            onerror="this.onerror=null; this.src='https://via.placeholder.com/400x500?text=Poster+KIK';"
-                        >
-                        <div class="absolute top-3 left-3 bg-emerald-600 text-white text-[11px] font-semibold px-2.5 py-1 rounded-md">
-                            Promosi
-                        </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-slate-900 text-lg group-hover:text-brand-600 transition-colors">Poster Promosi</h3>
-                            <p class="text-slate-600 text-sm mt-1">Membuat poster promosi KIK</p>
-                        </div>
-                        <button 
-                            onclick="openModal('https://cdn.phototourl.com/free/2026-09-01-c6d49860-68ef-4d35-89c1-f11b7067a022.jpg', 'Poster Promosi', 'Membuat poster promosi KIK.')"
-                            class="mt-4 w-full py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-brand-50 hover:border-brand-200 hover:text-brand-600 transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-expand text-[10px]"></i> Perbesar Gambar
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Karya 6: Poster Sapoe Sarebu -->
-                <div class="portfolio-item poster group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200/80 hover:shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-200">
-                        <img 
-                            src="https://cdn.phototourl.com/member/2026-09-01-45a038ed-6285-4569-bf21-a93f58c27ace.jpg" 
-                            alt="[Poster Sapoe Sarebu - Tugas Akhir]" 
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer"
-                            onclick="openModal(this.src, 'Poster Sapoe Sarebu', 'Membuat poster Sapoe Sarebu sebagai tugas akhir semester 4.')"
-                            onerror="this.onerror=null; this.src='https://via.placeholder.com/400x500?text=Sapoe+Sarebu';"
-                        >
-                        <div class="absolute top-3 left-3 bg-purple-600 text-white text-[11px] font-semibold px-2.5 py-1 rounded-md">
-                            Tugas Akhir
-                        </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-slate-900 text-lg group-hover:text-brand-600 transition-colors">Poster Sapoe Sarebu</h3>
-                            <p class="text-slate-600 text-sm mt-1">Tugas akhir semester 4</p>
-                        </div>
-                        <button 
-                            onclick="openModal('https://cdn.phototourl.com/member/2026-09-01-45a038ed-6285-4569-bf21-a93f58c27ace.jpg', 'Poster Sapoe Sarebu', 'Membuat poster Sapoe Sarebu sebagai tugas akhir semester 4.')"
-                            class="mt-4 w-full py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-brand-50 hover:border-brand-200 hover:text-brand-600 transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-expand text-[10px]"></i> Perbesar Gambar
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Karya 7: Logo UMKM -->
-                <div class="portfolio-item branding group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200/80 hover:shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-200">
-                        <img 
-                            src="https://cdn.phototourl.com/member/2026-09-01-7c546063-6206-4053-ab50-08f2dec8589d.jpg" 
-                            alt="[Logo UMKM Cookies]" 
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer"
-                            onclick="openModal(this.src, 'Logo UMKM', 'Tugas brief membuat logo UMKM cookies.')"
-                            onerror="this.onerror=null; this.src='https://via.placeholder.com/400x500?text=Logo+UMKM';"
-                        >
-                        <div class="absolute top-3 left-3 bg-amber-600 text-white text-[11px] font-semibold px-2.5 py-1 rounded-md">
-                            Desain Logo
-                        </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-slate-900 text-lg group-hover:text-brand-600 transition-colors">Logo UMKM</h3>
-                            <p class="text-slate-600 text-sm mt-1">Tugas brief membuat logo UMKM cookies</p>
-                        </div>
-                        <button 
-                            onclick="openModal('https://cdn.phototourl.com/member/2026-09-01-7c546063-6206-4053-ab50-08f2dec8589d.jpg', 'Logo UMKM', 'Tugas brief membuat logo UMKM cookies.')"
-                            class="mt-4 w-full py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-brand-50 hover:border-brand-200 hover:text-brand-600 transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-expand text-[10px]"></i> Perbesar Gambar
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Karya 8: Proses Creative -->
-                <div class="portfolio-item branding group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200/80 hover:shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-200">
-                        <img 
-                            src="https://cdn.phototourl.com/member/2026-09-01-14f8608d-d301-44e0-b405-629171c71d24.jpg" 
-                            alt="[Proses Creative DKV]" 
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer"
-                            onclick="openModal(this.src, 'Proses Creative', 'Membuat proses creative DKV.')"
-                            onerror="this.onerror=null; this.src='https://via.placeholder.com/400x500?text=Proses+Creative';"
-                        >
-                        <div class="absolute top-3 left-3 bg-teal-600 text-white text-[11px] font-semibold px-2.5 py-1 rounded-md">
-                            Konsep DKV
-                        </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-slate-900 text-lg group-hover:text-brand-600 transition-colors">Proses Creative</h3>
-                            <p class="text-slate-600 text-sm mt-1">Membuat proses creative DKV</p>
-                        </div>
-                        <button 
-                            onclick="openModal('https://cdn.phototourl.com/member/2026-09-01-14f8608d-d301-44e0-b405-629171c71d24.jpg', 'Proses Creative', 'Membuat proses creative DKV.')"
-                            class="mt-4 w-full py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-brand-50 hover:border-brand-200 hover:text-brand-600 transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-expand text-[10px]"></i> Perbesar Gambar
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Karya 9: Poster Anti Narkoba -->
-                <div class="portfolio-item poster group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200/80 hover:shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-200">
-                        <img 
-                            src="https://cdn.phototourl.com/member/2026-09-03-af8df302-03cf-48d1-be35-6f58ff365df8.jpg" 
-                            alt="[Poster Anti Narkoba - BK]" 
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer"
-                            onclick="openModal(this.src, 'Poster Anti Narkoba', 'Tugas bimbingan konseling (BK) edukasi pencegahan narkoba.')"
-                            onerror="this.onerror=null; this.src='https://via.placeholder.com/400x500?text=Poster+Anti+Narkoba';"
-                        >
-                        <div class="absolute top-3 left-3 bg-rose-600 text-white text-[11px] font-semibold px-2.5 py-1 rounded-md">
-                            Edukasi BK
-                        </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-slate-900 text-lg group-hover:text-brand-600 transition-colors">Poster Anti Narkoba</h3>
-                            <p class="text-slate-600 text-sm mt-1">Tugas bimbingan konseling</p>
-                        </div>
-                        <button 
-                            onclick="openModal('https://cdn.phototourl.com/member/2026-09-03-af8df302-03cf-48d1-be35-6f58ff365df8.jpg', 'Poster Anti Narkoba', 'Tugas bimbingan konseling (BK) edukasi pencegahan narkoba.')"
-                            class="mt-4 w-full py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-brand-50 hover:border-brand-200 hover:text-brand-600 transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-expand text-[10px]"></i> Perbesar Gambar
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Karya 10: Watermark -->
-                <div class="portfolio-item branding group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200/80 hover:shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-200 flex items-center justify-center p-4">
-                        <img 
-                            src="https://cdn.phototourl.com/member/2026-09-03-757f5a76-ecb8-4870-999e-a43feb8f073c.png" 
-                            alt="[Desain Watermark - Hak Cipta Karya]" 
-                            class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500 cursor-pointer"
-                            onclick="openModal(this.src, 'Desain Watermark', 'Desain identitas watermark untuk penanda hak cipta karya visual.')"
-                            onerror="this.onerror=null; this.src='https://via.placeholder.com/400x500?text=Watermark';"
-                        >
-                        <div class="absolute top-3 left-3 bg-cyan-600 text-white text-[11px] font-semibold px-2.5 py-1 rounded-md">
-                            Identitas Visual
-                        </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-slate-900 text-lg group-hover:text-brand-600 transition-colors">Desain Watermark</h3>
-                            <p class="text-slate-600 text-sm mt-1">Identitas penanda hak cipta karya</p>
-                        </div>
-                        <button 
-                            onclick="openModal('https://cdn.phototourl.com/member/2026-09-03-757f5a76-ecb8-4870-999e-a43feb8f073c.png', 'Desain Watermark', 'Desain identitas watermark untuk penanda hak cipta karya visual.')"
-                            class="mt-4 w-full py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-brand-50 hover:border-brand-200 hover:text-brand-600 transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-expand text-[10px]"></i> Perbesar Gambar
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Kontak -->
-    <section id="kontak" class="py-16 bg-slate-900 text-white relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                
-                <div>
-                    <span class="text-brand-400 font-semibold text-sm">Hubungi Saya</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold mt-2 leading-tight">
-                        Mari Bekerja Sama & Berkolaborasi!
-                    </h2>
-                    <p class="text-slate-400 mt-4 text-sm sm:text-base leading-relaxed">
-                        Terbuka untuk diskusi proyek desain grafis, poster promosi, pemesanan logo UMKM, maupun pertanyaan seputar karya saya.
-                    </p>
-
-                    <div class="mt-8 space-y-4">
-                        <div class="flex items-center space-x-4 p-4 rounded-xl bg-slate-800/60 border border-slate-700/50">
-                            <div class="w-12 h-12 rounded-lg bg-brand-500/20 text-brand-400 flex items-center justify-center text-xl shrink-0">
-                                <i class="fa-regular fa-envelope"></i>
-                            </div>
-                            <div class="overflow-hidden">
-                                <p class="text-xs text-slate-400">Email Resmi</p>
-                                <a href="mailto:De.azmi02@gmail.com" class="text-sm font-semibold hover:text-brand-400 transition-colors truncate block">
-                                    De.azmi02@gmail.com
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center space-x-4 p-4 rounded-xl bg-slate-800/60 border border-slate-700/50">
-                            <div class="w-12 h-12 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl shrink-0">
-                                <i class="fa-solid fa-school"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-slate-400">Sekolah</p>
-                                <p class="text-sm font-semibold text-slate-200">
-                                    SMK Al Irsyad Al Islamiyyah Haurgeulis
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Form Kirim Pesan Cepat -->
-                <div class="bg-slate-800/80 p-6 sm:p-8 rounded-2xl border border-slate-700/60 shadow-2xl">
-                    <h3 class="text-xl font-bold mb-4">Kirim Pesan Cepat</h3>
-                    <form onsubmit="handleSendForm(event)" class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-medium text-slate-300 mb-1">Nama Anda</label>
-                            <input type="text" id="senderName" required placeholder="Masukkan nama..." class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-brand-500 transition-colors">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-300 mb-1">Pesan / Diskusi Karya</label>
-                            <textarea id="senderMessage" rows="4" required placeholder="Tuliskan pesan Anda di sini..." class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-brand-500 transition-colors"></textarea>
-                        </div>
-                        <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl transition-all shadow-lg shadow-brand-600/30 flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane text-xs"></i> Kirim via Email
-                        </button>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-slate-950 text-slate-500 py-8 text-xs text-center border-t border-slate-800">
-        <div class="max-w-6xl mx-auto px-4">
-            <p>© 2026 Nurul Azmi. Hak Cipta Dilindungi.</p>
-            <p class="mt-1 text-slate-600">SMK Al Irsyad Al Islamiyyah Haurgeulis</p>
-        </div>
-    </footer>
-
-    <!-- Modal Lightbox Preview Gambar -->
-    <div id="imageModal" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="relative max-w-3xl w-full bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl">
-            <!-- Tombol Tutup -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-
-            <div class="p-2 sm:p-4 bg-slate-950/60 flex justify-center items-center min-h-[250px]">
-                <img id="modalImage" src="" alt="Preview Karya" class="max-h-[70vh] object-contain rounded-lg">
-            </div>
-
-            <div class="p-6">
-                <h3 id="modalTitle" class="text-xl font-bold text-white"></h3>
-                <p id="modalDesc" class="text-slate-400 text-sm mt-2"></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- JavaScript Interaktif -->
-    <script>
-        // Modal Lightbox
-        function openModal(imgSrc, title, desc) {
-            document.getElementById('modalImage').src = imgSrc;
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalDesc').innerText = desc;
-            document.getElementById('imageModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            document.getElementById('imageModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        document.getElementById('imageModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // Filter Galeri Karya
-        function filterGallery(category) {
-            const items = document.querySelectorAll('.portfolio-item');
-            const buttons = document.querySelectorAll('.filter-btn');
-
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-slate-900', 'text-white');
-                btn.classList.add('bg-slate-100', 'text-slate-600');
-            });
-
-            event.target.classList.remove('bg-slate-100', 'text-slate-600');
-            event.target.classList.add('bg-slate-900', 'text-white');
-
-            items.forEach(item => {
-                if (category === 'all' || item.classList.contains(category)) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-
-        // Pengiriman Form
-        function handleSendForm(event) {
-            event.preventDefault();
-            const name = document.getElementById('senderName').value;
-            const message = document.getElementById('senderMessage').value;
             
-            const mailtoUrl = `mailto:De.azmi02@gmail.com?subject=Pesan Portofolio dari ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}`;
-            window.location.href = mailtoUrl;
-        }
-    </script>
-</body>
-</html>
-```
+                        
+    
+
+    
+        
+        
